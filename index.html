@@ -161,20 +161,20 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="2016/08/30/实习总结一/">实习总结一</a>
+      <a class="article-title" href="2016/08/19/实习总结一/">实习总结一</a>
     </h1>
   
 
         
-        <a href="2016/08/30/实习总结一/" class="archive-article-date">
-  	<time datetime="2016-08-30T07:14:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-30</time>
+        <a href="2016/08/19/实习总结一/" class="archive-article-date">
+  	<time datetime="2016-08-19T07:14:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="第一周-8-8——8-13"><a href="#第一周-8-8——8-13" class="headerlink" title="第一周(8.8——8.13)"></a>第一周(8.8——8.13)</h3><blockquote>
+        <blockquote>
 <p>短暂的五天眨眼而过，现简单总结</p>
 </blockquote>
 <ul>
@@ -216,7 +216,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JAVA 实习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">实习</a>
         		</li>
       		
 		</ul>
@@ -226,7 +230,139 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="2016/08/30/实习总结一/">展开全文 >></a>
+          <a class="article-more-a" href="2016/08/19/实习总结一/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Ubuntu下编译php5-6并添加pcntl拓展" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2016/07/14/Ubuntu下编译php5-6并添加pcntl拓展/">Ubuntu下编译php5.6并添加pcntl拓展</a>
+    </h1>
+  
+
+        
+        <a href="2016/07/14/Ubuntu下编译php5-6并添加pcntl拓展/" class="archive-article-date">
+  	<time datetime="2016-07-14T14:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>阅读<a href="https://github.com/walkor/Workerman" target="_blank" rel="external">workerman</a>开源项目需添加php的extension–pcntl，引入多线程。折腾了两天，先将经历记录于下：</p>
+<p>在查阅了N多资料后，在ubuntu下引入php的extension无非不过两种方法：</p>
+<ol>
+<li>重新编译PHP的后面configrue提示加上–enable-pcntl。</li>
+<li>不重新编译php，直接编译安装pcntl扩展。</li>
+</ol>
+<hr>
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><p>由于笔者初入ubuntu江湖，对ubuntu下的./configrue编译尚且不太熟悉。所以首先采用了方法2来添加pcntl.so</p>
+<ol>
+<li><p>查看已安装php的版本及相关配置信息</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> phpinfo() <span class="meta">?&gt;</span></span></div></pre></td></tr></table></figure>
+</li>
+<li><p>下载同版本<a href="http://php.net/downloads.php" target="_blank" rel="external">php</a>的源码</p>
+</li>
+<li><p>编译pcntl.so</p>
+<p>3.1 生成pcntl.so</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># cd /usr/local/src/php-5.6.21/ext/pcntl</span></div><div class="line"></div><div class="line"><span class="meta"># /usr/bin/phpize</span></div><div class="line"></div><div class="line"><span class="meta"># ./configure –with-php-config=/usr//bin/php-config</span></div><div class="line"></div><div class="line"><span class="meta"># make &amp;&amp; make install</span></div></pre></td></tr></table></figure>
+<p>生成的pcntl.so在/usr/lib/php5/20121212</p>
+<p><strong><em>注意：</em></strong></p>
+<ul>
+<li>phpize和php-config需使用已安装的php的</li>
+</ul>
+<p>3.2 修改php.ini</p>
+<blockquote>
+<p>如果找不到php.ini 可以使用locate php.ini 或者 find / -name php.ini进行查找</p>
+</blockquote>
+<p>然后将pcntl.so 加到php.ini中就可以了，使用php -m查看模块命令可以查看已安装的模块。<br><strong>奇迹尚未出现</strong>，笔者就此试了若干次，也不能成功，无赖只能使用方法1。</p>
+</li>
+</ol>
+<hr>
+<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><ol>
+<li><p>只需完全卸载php</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="built_in">get</span> –purge <span class="built_in">remove</span> libapache2-<span class="built_in">mod</span>-php5 php5 php5-<span class="built_in">gd</span> php5-mysql</div><div class="line">sudo apt-<span class="built_in">get</span> autoremove php5</div></pre></td></tr></table></figure>
+<p>删除关联</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo <span class="built_in">find</span> /etc -<span class="built_in">name</span> <span class="string">"*php*"</span> |xargs  rm -rf</div></pre></td></tr></table></figure>
+<p>清楚残留信息</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">dpkg</span> -l |grep<span class="regexp"> ^rc|awk</span> ‘&#123;<span class="attribute">print</span> <span class="variable">$2</span>&#125;’ |sudo xargs dpkg -P</div></pre></td></tr></table></figure>
+<p>最后用 <figure class="highlight plain"><figcaption><span>-l | grep php``` 和 ```dpkg -l | grep php5 ```检查，如无返回即干净卸载</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">***注意***</div><div class="line">  笔者走了许多弯路，将apache、php、mysql全部卸载发现不能重新安装apache这可急坏了笔者</div></pre></td></tr></table></figure></p>
+<p>   Reading package lists… Done</p>
+<p>   Building dependency tree       </p>
+<p>   Reading state information… Done</p>
+<p>   Some packages could not be installed. This may mean that you have</p>
+<p>   requested an impossible situation or if you are using the unstable</p>
+<p>   distribution that some required packages have not yet been created</p>
+<p>   or been moved out of Incoming.</p>
+<p>   The following information may help to resolve the situation:</p>
+<p>   The following packages have unmet dependencies:</p>
+<p>   apache2 : Depends: apache2-bin (= 2.4.7-1ubuntu4.8) but it is not going to be installed</p>
+<p>   E: Unable to correct problems, you have held broken packages.</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">所幸找到了方法解决：</div></pre></td></tr></table></figure>
+<p> sudo aptitude install apache2</p>
+<p> sudo aptitude remove  libaprutil1</p>
+<p> sudo aptitude install apache2</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">2. </span>下载同版本[<span class="string">php</span>](<span class="link">http://php.net/downloads.php</span>)的源码</div><div class="line"></div><div class="line"><span class="bullet">3. </span>编译php</div></pre></td></tr></table></figure>
+<p>cd php-5.6.21</p>
+<p>./configure –with-apxs2=/usr/bin/apxs –with-mysql=mysqlnd –enable-fpm –enable-pcntl –enable-mysqlnd –enable-opcache –enable-sockets –enable-sysvmsg –enable-sysvsem  –enable-sysvshm –enable-shmop –enable-zip –enable-ftp –enable-soap –enable-xml –enable-mbstring –disable-rpath –disable-debug –disable-fileinfo –with-mysql –with-mysqli –with-pdo-mysql –with-pcre-regex –with-iconv –with-zlib –with-mcrypt –with-gd –with-openssl –with-mhash –with-xmlrpc –with-curl –with-imap-ssl</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  ***注意***</div><div class="line">  需要重点关注的是:</div><div class="line">  * ```--with-apxs2```和```--with-mysql```的位置</div><div class="line">    apxs可以用```locate apxs```来查找，但是mysql的找不到只能用mysqlnd</div><div class="line">    &gt; 如果源码编译安装php的话，需要在编译时指定–with-apxs2=<span class="regexp">/usr/</span>local<span class="regexp">/apache2/</span>bin/apxs表示告诉编译器通过apache的mod_php5模块来提供对php的解析</div><div class="line"></div><div class="line">  *  ```--prefix=<span class="regexp">/usr/</span>local<span class="regexp">/php```  ```--with-config-file-path=/</span>usr<span class="regexp">/local/</span>php/etc```参数的使用</div><div class="line">  笔者起先自定义的安装路径，使用```php -m``` 查看php未安装成功，索性去掉这两个参数，使用默认安装路径，结果成功了</div><div class="line"></div><div class="line">  * 可能缺少某些库，只需使用```sudo apt-cache search```查找，然后安装即可</div><div class="line"></div><div class="line"><span class="number">4.</span> make &amp;&amp; make install</div><div class="line">      &gt; Installing shared <span class="string">extensions:</span>     <span class="regexp">/usr/</span>local<span class="regexp">/lib/</span>php<span class="regexp">/extensions/</span>no-debug-non-zts<span class="number">-20131226</span>/</div><div class="line">      Installing PHP CLI <span class="string">binary:</span>        <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span></div><div class="line">      Installing PHP CLI man <span class="string">page:</span>      <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>man<span class="regexp">/man1/</span></div><div class="line">      Installing PHP FPM <span class="string">binary:</span>        <span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span></div><div class="line">      Installing PHP FPM <span class="string">config:</span>        <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span></div><div class="line">      Installing PHP FPM man <span class="string">page:</span>      <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>man<span class="regexp">/man8/</span></div><div class="line">      Installing PHP FPM status <span class="string">page:</span>   <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>php<span class="regexp">/fpm/</span></div><div class="line">      Installing PHP CGI <span class="string">binary:</span>        <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span></div><div class="line">      Installing PHP CGI man <span class="string">page:</span>      <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>man<span class="regexp">/man1/</span></div><div class="line">      Installing build <span class="string">environment:</span>     <span class="regexp">/usr/</span>local<span class="regexp">/lib/</span>php<span class="regexp">/build/</span></div><div class="line">      Installing header <span class="string">files:</span>           <span class="regexp">/usr/</span>local<span class="regexp">/include/</span>php/</div><div class="line">      Installing helper <span class="string">programs:</span>       <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span></div><div class="line"><span class="symbol">        program:</span> phpize</div><div class="line"><span class="symbol">        program:</span> php-config</div><div class="line">      Installing man <span class="string">pages:</span>             <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>man<span class="regexp">/man1/</span></div><div class="line"><span class="symbol">        page:</span> phpize<span class="number">.1</span></div><div class="line"><span class="symbol">        page:</span> php-config<span class="number">.1</span></div><div class="line">      Installing PEAR <span class="string">environment:</span>      <span class="regexp">/usr/</span>local<span class="regexp">/lib/</span>php/</div><div class="line">      [PEAR] Archive_Tar    - already <span class="string">installed:</span> <span class="number">1.4</span><span class="number">.0</span></div><div class="line">      [PEAR] Console_Getopt - already <span class="string">installed:</span> <span class="number">1.4</span><span class="number">.1</span></div><div class="line">      [PEAR] Structures_Graph- already <span class="string">installed:</span> <span class="number">1.1</span><span class="number">.1</span></div><div class="line">      [PEAR] XML_Util       - already <span class="string">installed:</span> <span class="number">1.3</span><span class="number">.0</span></div><div class="line">      [PEAR] PEAR           - already <span class="string">installed:</span> <span class="number">1.10</span><span class="number">.1</span></div><div class="line">      Wrote PEAR system config file <span class="string">at:</span> <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc/pear.conf</div><div class="line">      You may want to <span class="string">add:</span> <span class="regexp">/usr/</span>local<span class="regexp">/lib/</span>php to your php.ini include_path</div><div class="line">      <span class="regexp">/usr/</span>local<span class="regexp">/src/</span>php<span class="number">-5.6</span><span class="number">.21</span><span class="regexp">/build/</span>shtool install -c ext<span class="regexp">/phar/</span>phar.phar <span class="regexp">/usr/</span>local/bin</div><div class="line">      ln -s -f phar.phar <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>phar</div><div class="line">      Installing PDO <span class="string">headers:</span>           <span class="regexp">/usr/</span>local<span class="regexp">/include/</span>php<span class="regexp">/ext/</span>pdo/</div><div class="line"></div><div class="line">    运行```php -m</div></pre></td></tr></table></figure>
+<h4 id="最幸福的时刻莫过于此，就犹如再遇许久未逢的那个姑娘"><a href="#最幸福的时刻莫过于此，就犹如再遇许久未逢的那个姑娘" class="headerlink" title="最幸福的时刻莫过于此，就犹如再遇许久未逢的那个姑娘"></a>最幸福的时刻莫过于此，就犹如再遇许久未逢的那个姑娘</h4><p> <strong>Success</strong></p>
+</li>
+</ol>
+<hr>
+<p>但是革命尚且成功，同志仍需努力<br>运行<figure class="highlight plain"><figcaption><span>phpinfo(); ?>``` OMG!居然给我显示的是源码。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">好吧，看来还得将编译安装php与apache相关连起来，经查阅资料，关键的关键在于```mod_php5.so```的加载</div><div class="line">&gt; Apache对于php的解析，就是通过众多Module中的php Module来完成的，加载php是通过php5这个模块来实现的，下面通过图来说明Apache加载php模块的过程及代码如何加载php。</div><div class="line">　　把php最终集成到Apache系统中，还需要对Apache进行一些必要的设置。这里，我们就以php的mod_php5 SAPI运行模式为例进行讲解，至于SAPI这个概念后面我们还会在其它的文章中讲解。</div><div class="line">　　假定我们安装的版本是Apache2 和 Php5，那么需要编辑Apache的主配置文件http.conf，在其中加入下面的几行内容：</div><div class="line">　　Unix/Linux环境下：</div><div class="line">　　LoadModule php5_module modules/mod_php5.so</div><div class="line">　　AddType application/x-httpd-php .php</div><div class="line">　　注：其中modules/mod_php5.so 是X系统环境下mod_php5.so文件的安装位置。</div><div class="line">　　Windows环境下：</div><div class="line">　　LoadModule php5_module d:/php/php5apache2.dll</div><div class="line">　　AddType application/x-httpd-php .php</div><div class="line">　　注：其中d:/php/php5apache2.dll 是在Windows环境下php5apache2.dll文件的安装位置。</div><div class="line">　　这两项配置就是告诉Apache Server，以后收到的Url用户请求，凡是以php作为后缀，就需要调用php5_module模块（mod_php5.so/ php5apache2.dll）进行处理。</div><div class="line"></div><div class="line">* 配置apache的配置文件，网上好多都说是配置httpd.conf，但是经查确实找不到该文件，便直接配置```/etc/apache2/apache2.conf</div></pre></td></tr></table></figure></p>
+<p>添加：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">LoadModule php5_module /usr/local/src/php-<span class="number">5.6</span>.<span class="number">21</span>/libs/libphp5<span class="selector-class">.so</span></div><div class="line">DirectoryIndex index<span class="selector-class">.html</span> index<span class="selector-class">.shtml</span> index<span class="selector-class">.cgi</span> index<span class="selector-class">.php</span> index<span class="selector-class">.phtml</span> index<span class="selector-class">.php3</span></div><div class="line">AddHandler php5-script <span class="selector-class">.php</span> <span class="selector-class">.html</span></div><div class="line">AddType text/<span class="selector-tag">html</span> <span class="selector-class">.php</span> .html</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编译</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pcntl</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="2016/07/14/Ubuntu下编译php5-6并添加pcntl拓展/">展开全文 >></a>
         </p>
       
 
