@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ihowq.com/about/index.html</loc>
+    
+    <lastmod>2017-03-30T07:50:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ihowq.com/2016/07/14/Ubuntu%E4%B8%8B%E7%BC%96%E8%AF%91php5-6%E5%B9%B6%E6%B7%BB%E5%8A%A0pcntl%E6%8B%93%E5%B1%95/</loc>
     
     <lastmod>2017-03-30T07:43:27.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://ihowq.com/2016/08/19/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%80/</loc>
     
     <lastmod>2017-03-30T07:34:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ihowq.com/about/index.html</loc>
-    
-    <lastmod>2017-03-30T06:44:06.000Z</lastmod>
     
   </url>
   
